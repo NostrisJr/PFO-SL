@@ -1,0 +1,35 @@
+0000 2800        mov r0,#5
+     0005
+0002 1800        str r0,var
+     0022
+0004 0900        ldr r1,var
+     0022
+0006 5020        cmp r1,r0
+0007 6800        beq okls
+     000B
+0009 8800 @errls b errls
+     0009
+000B 3224 @okls  add r2,r1,r1
+000C 5044        cmp r2,r1
+000D 7800        blt err1
+     0011
+000F 8800        b ok1
+     0013
+0011 8800 @err1  b err1
+     0011
+0013 5820 @ok1   cmp r1,#5
+     0005
+0015 6800        beq ok2
+     0019
+0017 8800 @err2  b err2
+     0017
+0019 4328 @ok2   sub r3,r1,r2
+001A 5860        cmp r3,#0
+     0000
+001C 7800        blt end
+     0020
+001E 8800 @err3  b err3
+     001E
+0020 8800 @end   b end
+     0020
+0022 0000 @var   rmw 1
